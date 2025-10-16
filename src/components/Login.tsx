@@ -162,7 +162,7 @@ export function Login({ onLoginSuccess, onBack }: LoginProps) {
                 : (mode === 'login' ? 'Sign In' : 'Sign Up')}
             </Button>
 
-            <div className="text-sm text-center">
+            {/* <div className="text-sm text-center">
               <button
                 type="button"
                 onClick={toggleMode}
@@ -173,7 +173,7 @@ export function Login({ onLoginSuccess, onBack }: LoginProps) {
                   ? "Don't have an account? Sign up" 
                   : 'Already have an account? Sign in'}
               </button>
-            </div>
+            </div> */}
           </form>
         </CardContent>
       </Card>

@@ -5,6 +5,7 @@ import { Card, CardContent } from './commons/Card';
 import { Button } from './commons/Button';
 import { Badge } from './commons/Badge';
 import { Progress } from './commons/Progress';
+import { modules } from '../data/modules';
 
 interface Topic {
   title: string;
@@ -20,160 +21,6 @@ interface ModulePageProps {
 export function ModulePage({ moduleId, onNavigateHome }: ModulePageProps) {
   const { isAuthenticated } = useAuth();
   const [currentStep, setCurrentStep] = useState(0);
-
-  // Module data structure
-  const modules: Record<string, { title: string; topics: Topic[] }> = {
-    '1': {
-      title: 'Foundations of Product Management',
-      topics: [
-        {
-          title: 'Product Management Fundamentals',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'In this lesson, you learned about the core responsibilities of a Product Manager, including defining product vision, prioritizing features, and collaborating with cross-functional teams. Key takeaways include understanding the product lifecycle and the importance of customer-centric thinking.'
-        },
-        {
-          title: 'Market Research',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'This lesson covered essential market research techniques including customer surveys, competitive analysis, and market segmentation. You learned how to identify target audiences and validate product ideas through data-driven insights.'
-        },
-        {
-          title: 'Competitive Analysis',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'You explored frameworks for analyzing competitors, including SWOT analysis and competitive positioning maps. Understanding your competitive landscape is crucial for differentiation and strategic planning.'
-        },
-        {
-          title: 'Product Lifecycle',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'This lesson explained the stages of product lifecycle from introduction to decline. You learned strategies for managing products at each stage and making data-informed decisions about product evolution.'
-        }
-      ]
-    },
-    '2': {
-      title: 'Product Strategy & Vision',
-      topics: [
-        {
-          title: 'Strategic Planning',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Learn how to develop comprehensive product strategies aligned with business goals. This includes market analysis, competitive positioning, and long-term planning frameworks.'
-        },
-        {
-          title: 'Vision & Roadmapping',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Master the art of creating compelling product visions and translating them into actionable roadmaps. Understand how to communicate strategy to stakeholders.'
-        },
-        {
-          title: 'OKRs & KPIs',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Discover how to set meaningful objectives and key results (OKRs) and track product performance through key performance indicators (KPIs).'
-        },
-        {
-          title: 'Go-to-Market Strategy',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Learn to develop effective go-to-market strategies including positioning, pricing, and launch planning to ensure successful product adoption.'
-        }
-      ]
-    },
-    '3': {
-      title: 'User Experience & Design Thinking',
-      topics: [
-        {
-          title: 'User Research Methods',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Explore various user research methodologies including interviews, surveys, and observational studies to gather meaningful insights.'
-        },
-        {
-          title: 'Persona Development',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Learn to create detailed user personas that represent your target audience and guide product decisions.'
-        },
-        {
-          title: 'Journey Mapping',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Master the technique of mapping user journeys to identify pain points and opportunities for improvement.'
-        },
-        {
-          title: 'Usability Testing',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Understand how to conduct effective usability tests and translate findings into actionable product improvements.'
-        }
-      ]
-    },
-    '4': {
-      title: 'Agile & Scrum Methodologies',
-      topics: [
-        {
-          title: 'Scrum Framework',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Deep dive into the Scrum framework, understanding roles, ceremonies, and artifacts that drive agile product development.'
-        },
-        {
-          title: 'Sprint Planning',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Learn effective sprint planning techniques to maximize team productivity and deliver value consistently.'
-        },
-        {
-          title: 'Backlog Management',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Master the art of prioritizing and managing product backlogs to ensure the most valuable work gets done first.'
-        },
-        {
-          title: 'Team Collaboration',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Discover best practices for fostering collaboration within cross-functional teams and removing impediments.'
-        }
-      ]
-    },
-    '5': {
-      title: 'Data-Driven Product Decisions',
-      topics: [
-        {
-          title: 'Analytics & Metrics',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Learn to identify and track the right metrics that matter for your product and business goals.'
-        },
-        {
-          title: 'A/B Testing',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Master the fundamentals of A/B testing to validate hypotheses and make data-informed decisions.'
-        },
-        {
-          title: 'Product Experimentation',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Understand how to design and run product experiments that generate valuable insights.'
-        },
-        {
-          title: 'ROI Analysis',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Learn to calculate and communicate the return on investment for product initiatives.'
-        }
-      ]
-    },
-    '6': {
-      title: 'Leadership & Stakeholder Management',
-      topics: [
-        {
-          title: 'Team Leadership',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Develop leadership skills essential for guiding product teams and driving results.'
-        },
-        {
-          title: 'Communication Skills',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Master effective communication techniques for presenting ideas and influencing stakeholders.'
-        },
-        {
-          title: 'Conflict Resolution',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Learn strategies for managing conflicts and building consensus among diverse stakeholders.'
-        },
-        {
-          title: 'Executive Reporting',
-          videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          summary: 'Understand how to communicate product status and strategy to executive leadership effectively.'
-        }
-      ]
-    }
-  };
 
   const module = modules[moduleId];
 
@@ -287,7 +134,7 @@ export function ModulePage({ moduleId, onNavigateHome }: ModulePageProps) {
                     </div>
                   )}
                   <span className="hidden sm:inline text-sm whitespace-nowrap">
-                    {topic.title.split(' ').slice(0, 2).join(' ')}
+                    {topic.subtitle.split(' ').slice(0, 2).join(' ')}
                   </span>
                 </button>
                 {index < totalSteps - 1 && (
@@ -305,7 +152,7 @@ export function ModulePage({ moduleId, onNavigateHome }: ModulePageProps) {
           {/* Topic Title */}
           <div>
             <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
-              {currentTopic.title}
+              {currentTopic.subtitle}
             </h2>
             <p className="text-gray-600">
               Topic {currentStep + 1} of {totalSteps}

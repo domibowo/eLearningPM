@@ -2,62 +2,13 @@ import { Clock, PlayCircle, FileText, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./commons/Card";
 import { Badge } from "./commons/Badge";
 import { Button } from "./commons/Button";
+import { modules } from "../data/modules";
 
 interface CurriculumProps {
   onModuleClick?: (moduleId: string) => void;
 }
 
 export function Curriculum({ onModuleClick }: CurriculumProps) {
-  const modules = [
-    {
-      title: "Foundations of Product Management",
-      duration: "2 weeks",
-      lessons: 8,
-      assignments: 2,
-      topics: ["Product Management Fundamentals", "Market Research", "Competitive Analysis", "Product Lifecycle"],
-      level: "Beginner"
-    },
-    {
-      title: "Product Strategy & Vision",
-      duration: "3 weeks",
-      lessons: 12,
-      assignments: 3,
-      topics: ["Strategic Planning", "Vision & Roadmapping", "OKRs & KPIs", "Go-to-Market Strategy"],
-      level: "Intermediate"
-    },
-    {
-      title: "User Experience & Design Thinking",
-      duration: "2 weeks",
-      lessons: 10,
-      assignments: 2,
-      topics: ["User Research Methods", "Persona Development", "Journey Mapping", "Usability Testing"],
-      level: "Intermediate"
-    },
-    {
-      title: "Agile & Scrum Methodologies",
-      duration: "2 weeks",
-      lessons: 9,
-      assignments: 2,
-      topics: ["Scrum Framework", "Sprint Planning", "Backlog Management", "Team Collaboration"],
-      level: "Intermediate"
-    },
-    {
-      title: "Data-Driven Product Decisions",
-      duration: "3 weeks",
-      lessons: 11,
-      assignments: 3,
-      topics: ["Analytics & Metrics", "A/B Testing", "Product Experimentation", "ROI Analysis"],
-      level: "Advanced"
-    },
-    {
-      title: "Leadership & Stakeholder Management",
-      duration: "2 weeks",
-      lessons: 8,
-      assignments: 2,
-      topics: ["Team Leadership", "Communication Skills", "Conflict Resolution", "Executive Reporting"],
-      level: "Advanced"
-    }
-  ];
 
   const getLevelColor = (level: string) => {
     switch (level) {
@@ -82,7 +33,7 @@ export function Curriculum({ onModuleClick }: CurriculumProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {modules.map((module, index) => (
+          {Object.values(modules).map((module, index) => (
             <Card key={index} className="hover:shadow-lg transition-all hover:border-blue-300 cursor-pointer group">
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
@@ -117,7 +68,7 @@ export function Curriculum({ onModuleClick }: CurriculumProps) {
                       {module.topics.map((topic, topicIndex) => (
                         <li key={topicIndex} className="text-sm text-gray-600 flex items-center">
                           <div className="w-1.5 h-1.5 bg-blue-700 rounded-full mr-2 flex-shrink-0"></div>
-                          {topic}
+                          {topic.subtitle}
                         </li>
                       ))}
                     </ul>
